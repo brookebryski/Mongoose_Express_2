@@ -14,11 +14,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/musicApp', { useNewUrlParser: true, 
     console.log(err)
 })
 
-app.set('views', path.join(__dirname));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/home', (req, res) => {
-  
+app.get('/bands', async (req, res) => {
+  const bands = await Band.find({});
+  res.render('bands/index', { bands });
 })
 
 app.listen(3000, () => {

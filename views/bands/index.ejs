@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>All Bands</title>
+</head>
+<body>
+    <h1>All Bands</h1>
+       <ul>
+        <% for(let band of bands) { %>
+            <li><%= band.name %> - <%= band.genre %> - <%= band.rating %> stars</li>
+       <% } %> 
+        
+    </ul> 
+</body>
+</html>
