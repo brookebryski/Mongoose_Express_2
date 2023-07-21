@@ -9,7 +9,7 @@
     <h1>All Bands</h1>
        <ul>
         <% for(let band of bands) { %>
-            <li><%= band.name %> - <%= band.genre %> - <%= band.rating %> stars</li>
+            <li><a href="/bands/<%= band._id %>"><%= band.name %></a></li>
        <% } %> 
         
     </ul> 

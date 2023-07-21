@@ -22,6 +22,12 @@ app.get('/bands', async (req, res) => {
   res.render('bands/index', { bands });
 })
 
+app.get('/bands/:id', async (req, res) => {
+    const { id } = req.params;
+    const band = await Band.findById(id);
+    res.render('bands/show', { band })
+})
+
 app.listen(3000, () => {
     console.log("Listening on port 3000")
 })
