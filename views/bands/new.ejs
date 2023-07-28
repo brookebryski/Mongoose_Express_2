@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Band</title>
+</head>
+<body>
+    <h1>Add a Band</h1>
+    <form action="/bands" method="POST">
+        <label for="name">Band Name</label>
+        <input type="text" name="name" id="name" placeholder="band name">
+        <label for="rating">Rating</label>
+        <input type="number" name="rating" id="rating" placeholder="rating">
+        <label for="genre">Genre</label>
+        <select name="genre" id="genre">
+            <option value="indie">Indie</option>
+            <option value="pop">Pop</option>
+            <option value="country">Country</option>
+            <option value="rap">Rap</option>
+            <option value="alt pop">Alt Pop</option>
+        </select>
+        <button>Add Band</button>
+    </form>
+</body>
+</html>

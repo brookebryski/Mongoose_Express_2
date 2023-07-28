@@ -16,10 +16,15 @@ mongoose.connect('mongodb://127.0.0.1:27017/musicApp', { useNewUrlParser: true, 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({extended: true}));
 
 app.get('/bands', async (req, res) => {
   const bands = await Band.find({});
   res.render('bands/index', { bands });
+})
+
+app.get('/bands/new', (req, res) => {
+    res.render('bands/new')
 })
 
 app.get('/bands/:id', async (req, res) => {
@@ -27,6 +32,12 @@ app.get('/bands/:id', async (req, res) => {
     const band = await Band.findById(id);
     res.render('bands/show', { band })
 })
+
+app.post('/bands'), async (req, res) => {
+    const newBand = new Band(req.body);
+    await newBand.save();
+    res.redirect(`/bands/${newBand._id}`)
+}
 
 app.listen(3000, () => {
     console.log("Listening on port 3000")
