@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 const Band = require('./models/band');
 
@@ -16,7 +17,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/musicApp', { useNewUrlParser: true, 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 app.get('/bands', async (req, res) => {
   const bands = await Band.find({});
@@ -31,6 +34,18 @@ app.get('/bands/:id', async (req, res) => {
     const { id } = req.params;
     const band = await Band.findById(id);
     res.render('bands/show', { band })
+})
+
+app.get('/bands/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const band = await Band.findById(id);
+    res.render('bands/edit', { band })
+})
+
+app.put('/bands/:id', async (req, res) => {
+    const { id } = req.params;
+    const band = await Band.findByIdAndUpdate(id, req.body, { runValidators: true});
+    res.redirect(`/bands/${band._id}`)
 })
 
 app.post('/bands'), async (req, res) => {
