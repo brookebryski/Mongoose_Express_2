@@ -54,6 +54,12 @@ app.post('/bands'), async (req, res) => {
     res.redirect(`/bands/${newBand._id}`)
 }
 
+app.delete('/bands/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedBand = await Band.findByIdAndDelete(id);
+    res.redirect('/products');
+})
+
 app.listen(3000, () => {
     console.log("Listening on port 3000")
 })
